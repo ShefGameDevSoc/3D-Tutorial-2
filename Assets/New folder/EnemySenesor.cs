@@ -18,7 +18,7 @@ public class EnemySenesor : MonoBehaviour
 
     void Start()
     {
-        PlayerRef = GameObject.FindGameObjectWithTag("Player");
+        PlayerRef = GameObject.FindGameObjectWithTag("player");
         StartCoroutine(FOVRoutine());
     }
 

@@ -20,25 +20,24 @@ public class AttackState : EnemyState
         
         if (distance > Enemy.AttackRange)//if out of range switch to chasestate
         {
+            shootTimer = 2;
             return chaseState;
         }
-        if (shootTimer == 0)//fire rate 
+        if (shootTimer <= 0.5)//fire rate 
         {
             RaycastHit Hit;
             Ray ray = new Ray(Enemy.sensor.transform.position, transform.forward);
 
             if (Physics.Raycast(ray, out Hit))
             {
-                if (Hit.rigidbody.gameObject.tag == "player")//if the raycast hits the player
-                {
-                    PlayerDestinantion = Hit.point;
-                    Debug.DrawLine(ray.origin, Hit.point);
 
+                PlayerDestinantion = Hit.point;
+                Debug.DrawLine(ray.origin, Hit.point);
+                InstantiateEnemyProjectile(Enemy.Eye1);
+                shootTimer = 2;
 
-                }
-
+    
             }
-            shootTimer = 1;//reset the fire rate
         }
         if (shootTimer > 0)//decresing the fire rate
         {
